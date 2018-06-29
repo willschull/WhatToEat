@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getChoices() {
-        int maxChicken = 3;
+        int maxChicken = 3; //No more than 3 per week
 
         ArrayList<String> chicken = new ArrayList<String>(4);
         String[] newChickRec = {"Chicken1", "Chicken2", "Chicken3", "Chicken4"};
