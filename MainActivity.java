@@ -26,13 +26,57 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getChoices() {
+        /*
+        TODO: Show recipe when name is clicked
+        TODO: Populate text boxes with info
+        TODO: Find a better way to add recipes.Possibilities are JSON or SQLite.
+
+         */
         EditText editText = findViewById(R.id.editText);
         String[] choices = new String[5];
 
         int maxChicken = 3; //No more than 3 per week
         int chickenCount = 0;
 
-        Map<Integer, List<String>> map1 = new HashMap<Integer, List<String>>();//This is one instance of the  map you want to store in the above list.
+        //Create map
+        Map<String, List<recipe>> map1 = new HashMap<String, List<recipe>>();
+
+        //Create lists and objects to add to list
+        List<recipe> chicken = new ArrayList<recipe>();
+        //Parameters: int points, String cost, String name
+        recipe Chicken1 = new recipe(2, "$$", "Chicken 1");
+        chicken.add(Chicken1);
+        recipe Chicken2 = new recipe(3, "$$$", "Chicken 2");
+        chicken.add(Chicken2);
+        //TODO: Add more chicken recipes
+        map1.put("chicken", chicken);
+
+        //TODO: Add pork recipes
+        //TODO: Add beef recipes
+        //TODO: Add fish recipes
+
+        Random rand = new Random();
+
+        int type = 0;
+        int n = 0;// for picking a recipe
+
+
+        for (int i = 0; i < 5; i++) {
+            //Generate random number to choose which category to pick from
+            type = 0;//rand.nextInt(4);
+            List<recipe> tmpList = new ArrayList<recipe>();
+            if(type == 0){ //0 is chicken
+                tmpList = map1.get("chicken");
+            }
+            n = rand.nextInt(tmpList.size());//random number for recipe
+            recipe obj = tmpList.get(n);
+            choices[i] = "Name: "+obj.getName()+" Cost: "+obj.getCost()+" Points: "+obj.getPoints();//set choices
+
+        }
+
+
+        /*
+        Map<Integer, List<String>> map1 = new HashMap<Integer, List<String>>();
         List<String> arraylist1 = new ArrayList<String>();
         List<String> arraylist2 = new ArrayList<String>();
         List<String> arraylist3 = new ArrayList<String>();
@@ -61,18 +105,15 @@ public class MainActivity extends AppCompatActivity {
             tempList = map1.get(points);//get list
             choices[i] = "Points: " + points + " Recipe: " + tempList.get(n);//set choices
 
-            //update list so it cant be picked again
-
         }
-
-
-
+        */
         editText.setText("");
 
         for (String choice : choices) {
             editText.append(choice);
             editText.append("\n");
         }
+
 
         //Bug testing
 
